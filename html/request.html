@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Form</title>
+    <!-- ลิงก์ไปยังไฟล์ CSS ที่อยู่ในโฟลเดอร์ css -->
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <div id="request-form-page">
+        <h2>Request Form</h2>
+        <label for="request-username">Username:</label>
+        <input type="text" id="request-username" placeholder="Enter Username" readonly>
+        <br>
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" placeholder="Enter E-mail">
+        <br>
+        <label for="request">Request:</label>
+        <textarea id="request" placeholder="Enter your request"></textarea>
+        <br>
+        <button id="submit-btn" onclick="submitForm()">Submit</button>
+        <button id="logout-btn" onclick="logout()">Log out</button>
+
+        <div id="submitted-info"></div>
+    </div>
+
+    <!-- ลิงก์ไปยังไฟล์ JavaScript ที่อยู่ใน root directory -->
+    <script src="../scripts.js"></script>
+</body>
+</html>

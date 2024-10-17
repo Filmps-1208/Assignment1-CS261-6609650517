@@ -1,5 +1,6 @@
 let loggedInUsername = '';
 
+// ฟังก์ชันสำหรับ Log in
 function login() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
@@ -7,20 +8,34 @@ function login() {
     if (username && password) {
         loggedInUsername = username;
         document.getElementById('welcome-message').innerText = `Welcome, ${username}`;
-        document.getElementById('request-btn').disabled = false;  // Enable the Request Form button
+        document.getElementById('request-btn').disabled = false;  // เปิดใช้งานปุ่ม Request Form
     } else {
         alert('Please enter both username and password.');
     }
 }
 
+// ฟังก์ชันสำหรับนำทางไปยังหน้าฟอร์ม Request Form
 function goToRequestForm() {
     if (loggedInUsername) {
-        document.getElementById('login-page').style.display = 'none';
-        document.getElementById('request-form-page').style.display = 'block';
-        document.getElementById('request-username').value = loggedInUsername;  // Pre-fill username
+        // เก็บข้อมูลผู้ใช้ใน LocalStorage เพื่อส่งต่อไปยังหน้าฟอร์ม
+        localStorage.setItem('username', loggedInUsername);
+        // เปลี่ยนเส้นทางไปยัง request.html
+        window.location.href = 'html/request.html';
     }
 }
 
+// ฟังก์ชันสำหรับแสดงข้อมูลที่ส่งจากหน้า login ไปยัง request form
+window.onload = function() {
+    const requestUsernameField = document.getElementById('request-username');
+    if (requestUsernameField) {
+        const storedUsername = localStorage.getItem('username');
+        if (storedUsername) {
+            requestUsernameField.value = storedUsername;
+        }
+    }
+}
+
+// ฟังก์ชันสำหรับ Submit ฟอร์ม
 function submitForm() {
     const username = document.getElementById('request-username').value;
     const email = document.getElementById('email').value;
@@ -39,15 +54,18 @@ function submitForm() {
     }
 }
 
+// ฟังก์ชันสำหรับ Log out
 function logout() {
-    loggedInUsername = '';
-    document.getElementById('username').value = '';
-    document.getElementById('password').value = '';
-    document.getElementById('welcome-message').innerText = '';
-    document.getElementById('request-btn').disabled = true;
-    document.getElementById('submitted-info').innerHTML = '';  // Clear submitted info
+    // ลบข้อมูลผู้ใช้จาก LocalStorage
+    localStorage.removeItem('username');
+    
+    // ล้างข้อมูลที่หน้าฟอร์ม
+    document.getElementById('request-username').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('request').value = '';
+    document.getElementById('submitted-info').innerHTML = '';  // ล้างข้อมูลที่แสดง
 
-    // Show login page again and hide request form page
-    document.getElementById('login-page').style.display = 'block';
-    document.getElementById('request-form-page').style.display = 'none';
+    // เปลี่ยนเส้นทางกลับไปหน้า Log in
+    window.location.href = '../index.html';
 }
+
