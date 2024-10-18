@@ -4,6 +4,7 @@ h2 {
     font-size: 2rem;
     color: darkslategray;
     margin-bottom: 20px;
+    text-transform: uppercase; /* ทำให้เป็นตัวพิมพ์ใหญ่ทั้งหมด */
 }
 
 /* การตั้งค่าทั่วไปสำหรับ body */
@@ -16,7 +17,7 @@ body {
 }
 
 /* การจัดการ input และ textarea */
-input, textarea {
+input, textarea, select {
     margin-bottom: 15px;
     padding: 12px;
     width: 90%;
@@ -29,7 +30,7 @@ input, textarea {
 }
 
 /* เปลี่ยนสีขอบเมื่อ input ถูกโฟกัส */
-input:focus, textarea:focus {
+input:focus, textarea:focus, select:focus {
     border-color: dodgerblue;
     outline: none;
 }
@@ -44,7 +45,7 @@ button {
     font-size: 1rem;
     font-weight: bold;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     color: white;
 }
 
@@ -55,6 +56,7 @@ button {
 
 #login-btn:hover {
     background-color: royalblue;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* ปุ่ม Request Form */
@@ -65,6 +67,7 @@ button {
 
 #request-btn:hover {
     background-color: darkgoldenrod;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* ปุ่ม Submit */
@@ -75,6 +78,7 @@ button {
 
 #submit-btn:hover {
     background-color: limegreen;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* ปุ่ม Logout */
@@ -84,6 +88,7 @@ button {
 
 #logout-btn:hover {
     background-color: darkred;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* การจัดการรูปแบบหน้า login และ request form */
@@ -112,3 +117,16 @@ textarea {
     font-size: 1.1rem;
     color: darkslategray;
 }
+
+/* การตั้งค่าสำหรับ dropdown (select) */
+select {
+    appearance: none;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+/* สไตล์สำหรับ option ใน dropdown */
+select option {
+    padding: 10px;
+}
+

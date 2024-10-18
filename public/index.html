@@ -16,6 +16,13 @@
         <label for="password">Password:</label>
         <input type="password" id="password" placeholder="Enter Password">
         <br>
+        <label for="role">Select your role:</label>
+        <select id="role">
+            <option value="">Select your role</option> 
+            <option value="student">Student</option>
+            <option value="lecturer">Lecturer</option>
+        </select>
+        <br>
         <button id="login-btn" onclick="login()">Log in</button>
         <button id="request-btn" onclick="goToRequestForm()" disabled>Request Form</button>
 
@@ -24,32 +31,33 @@
 
     <!-- ลิงก์ไปยังไฟล์ JavaScript -->
     <script>
-       let loggedInUsername = '';
+     let loggedInUsername = '';
 
-// ฟังก์ชันสำหรับ Log in
 function login() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
+    const role = document.getElementById('role').value; // ดึงบทบาทจาก dropdown
 
-    if (username && password) {
+    if (username && password && role) {
+        // ส่งข้อมูลไปยัง API login
         fetch('/api/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password })
+            body: JSON.stringify({ username, password, role }) // เพิ่ม role ใน request
         })
         .then(response => response.json())
         .then(data => {
             if (data.message === 'Login successful') {
-                loggedInUsername = data.username; // รับชื่อผู้ใช้จาก back-end
-                document.getElementById('welcome-message').innerText = `Welcome, ${loggedInUsername}`; // แสดงชื่อผู้ใช้
+                loggedInUsername = data.username;
+                document.getElementById('welcome-message').innerText = `Welcome, ${loggedInUsername} (${role})`;
                 document.getElementById('request-btn').disabled = false;  // เปิดใช้งานปุ่ม Request Form
             } else {
-                alert('Invalid username or password');
+                alert('Invalid username, password, or role');
             }
         })
         .catch(error => console.error('Error:', error));
     } else {
-        alert('Please enter both username and password.');
+        alert('Please enter username, password, and select a role.');
     }
 }
  // ฟังก์ชันสำหรับเปลี่ยนเส้นทางไปยังหน้า Request Form
