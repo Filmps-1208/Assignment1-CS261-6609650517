@@ -20,14 +20,17 @@ const users = [
 app.post('/api/login', (req, res) => {
     const { username, password } = req.body;
 
-    const user = users.find(u => u.username === username && u.password === password);
-    if (user) {
-        // ส่งข้อมูลชื่อผู้ใช้กลับไปที่ Front-end
+    // ตรวจสอบว่าผู้ใช้กรอกข้อมูลทั้ง username และ password หรือไม่
+    if (username && password) {
+        // ตอบกลับสำเร็จโดยไม่ต้องตรวจสอบกับฐานข้อมูล
         res.status(200).json({ message: 'Login successful', username });
     } else {
-        res.status(401).json({ message: 'Invalid username or password' });
+        // ตอบกลับว่าข้อมูลไม่ครบถ้วน
+        res.status(400).json({ message: 'Username and password are required' });
     }
 });
+
+
 
 // API สำหรับการยื่นคำร้อง
 app.post('/api/submit-request', (req, res) => {

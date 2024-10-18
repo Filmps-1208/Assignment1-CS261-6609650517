@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Request Form</title>
-    <!-- ลิงก์ไปยังไฟล์ CSS ที่อยู่ในโฟลเดอร์ css -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -25,7 +24,56 @@
         <div id="submitted-info"></div>
     </div>
 
-    <!-- ลิงก์ไปยังไฟล์ JavaScript ที่อยู่ใน root directory -->
-    <script src="scripts.js"></script>
+    <!-- ลิงก์ไปยังไฟล์ JavaScript -->
+    <script>
+        // เมื่อหน้าถูกโหลดขึ้นมา จะดึงชื่อผู้ใช้จาก localStorage
+        window.onload = function() {
+            const storedUsername = localStorage.getItem('username');
+            if (storedUsername) {
+                document.getElementById('request-username').value = storedUsername; // แสดงชื่อผู้ใช้ในฟิลด์ Username
+            } else {
+                alert('No user logged in.');
+                window.location.href = 'index.html'; // ถ้าไม่มีชื่อผู้ใช้ใน localStorage ให้กลับไปหน้า Login
+            }
+        }
+
+        // ฟังก์ชันสำหรับยื่นคำร้อง
+        function submitForm() {
+            const username = document.getElementById('request-username').value;
+            const email = document.getElementById('email').value;
+            const request = document.getElementById('request').value;
+
+            if (username && email && request) {
+                fetch('/api/submit-request', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, email, request })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message === 'Request submitted successfully') {
+                        const submittedInfo = document.getElementById('submitted-info');
+                        submittedInfo.innerHTML = `
+                            <h3>Submitted Information</h3>
+                            <p><strong>Username:</strong> ${username}</p>
+                            <p><strong>E-mail:</strong> ${email}</p>
+                            <p><strong>Request:</strong> ${request}</p>
+                        `;
+                    } else {
+                        alert('Failed to submit request');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            } else {
+                alert('Please fill out all fields.');
+            }
+        }
+
+        // ฟังก์ชันสำหรับ Log out
+        function logout() {
+            localStorage.removeItem('username'); // ลบชื่อผู้ใช้จาก localStorage
+            window.location.href = 'index.html'; // เปลี่ยนเส้นทางกลับไปหน้า Login
+        }
+    </script>
 </body>
 </html>

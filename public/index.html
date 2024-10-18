@@ -23,6 +23,44 @@
     </div>
 
     <!-- ลิงก์ไปยังไฟล์ JavaScript -->
-    <script src="scripts.js"></script>
+    <script>
+       let loggedInUsername = '';
+
+// ฟังก์ชันสำหรับ Log in
+function login() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    if (username && password) {
+        fetch('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message === 'Login successful') {
+                loggedInUsername = data.username; // รับชื่อผู้ใช้จาก back-end
+                document.getElementById('welcome-message').innerText = `Welcome, ${loggedInUsername}`; // แสดงชื่อผู้ใช้
+                document.getElementById('request-btn').disabled = false;  // เปิดใช้งานปุ่ม Request Form
+            } else {
+                alert('Invalid username or password');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    } else {
+        alert('Please enter both username and password.');
+    }
+}
+ // ฟังก์ชันสำหรับเปลี่ยนเส้นทางไปยังหน้า Request Form
+ function goToRequestForm() {
+        if (loggedInUsername) {
+            localStorage.setItem('username', loggedInUsername);
+            window.location.href = 'request.html';
+        } else {
+            alert('Please log in first.');
+        }
+    }
+    </script>
 </body>
 </html>
