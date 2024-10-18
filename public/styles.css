@@ -1,65 +1,114 @@
-h2{
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-
+/* ตั้งค่าสไตล์สำหรับหัวข้อหลัก */
+h2 {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 2rem;
+    color: darkslategray;
+    margin-bottom: 20px;
 }
 
-
+/* การตั้งค่าทั่วไปสำหรับ body */
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
+    margin: 0;
+    padding: 20px;
     text-align: center;
-    background-color:mediumvioletred;
+    background-color: mediumvioletred;
 }
 
+/* การจัดการ input และ textarea */
 input, textarea {
-    margin-bottom: 10px;
-    padding: 10px;
-    width: 80%;
+    margin-bottom: 15px;
+    padding: 12px;
+    width: 90%;
     max-width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease-in-out;
 }
 
+/* เปลี่ยนสีขอบเมื่อ input ถูกโฟกัส */
+input:focus, textarea:focus {
+    border-color: dodgerblue;
+    outline: none;
+}
+
+/* การจัดการปุ่มทั่วไป */
 button {
-    padding: 10px 20px;
+    padding: 12px 25px;
     margin: 10px;
     cursor: pointer;
-    border-radius: 5px; /* เพิ่มมุมโค้งให้ปุ่ม */
-    color:white;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease-in-out;
+    color: white;
 }
 
+/* ปุ่ม Login */
 #login-btn {
-    background-color:dodgerblue;
+    background-color: dodgerblue;
 }
 
+#login-btn:hover {
+    background-color: royalblue;
+}
+
+/* ปุ่ม Request Form */
 #request-btn {
-    background-color:gold; 
-    color: black; 
-}
-
-#submit-btn {
-    background-color:greenyellow; 
+    background-color: gold;
     color: black;
 }
 
-#logout-btn {
-    background-color: #FF0000; 
+#request-btn:hover {
+    background-color: darkgoldenrod;
 }
 
+/* ปุ่ม Submit */
+#submit-btn {
+    background-color: greenyellow;
+    color: black;
+}
+
+#submit-btn:hover {
+    background-color: limegreen;
+}
+
+/* ปุ่ม Logout */
+#logout-btn {
+    background-color: #ff0000;
+}
+
+#logout-btn:hover {
+    background-color: darkred;
+}
+
+/* การจัดการรูปแบบหน้า login และ request form */
 #login-page, #request-form-page {
     border: 1px solid #ccc;
-    padding: 20px;
-    width: 80%;
+    padding: 30px;
+    width: 90%;
     max-width: 500px;
-    margin: 0 auto;
-    box-shadow: 0px 0px 10px #ccc;
-    background-color:lightpink;
+    margin: 50px auto;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: lightpink;
+    border-radius: 10px;
 }
 
+/* การตั้งค่าสำหรับ textarea */
 textarea {
-    height: 100px;
+    height: 120px;
+    resize: vertical;
 }
 
+/* การจัดการข้อมูลที่ส่งแล้ว */
 #submitted-info {
-    margin-top: 20px;
-    border-top: 1px solid #ccc;
-    padding-top: 10px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid #ccc;
+    font-size: 1.1rem;
+    color: darkslategray;
 }
