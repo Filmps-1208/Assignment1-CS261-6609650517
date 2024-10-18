@@ -1,0 +1,14 @@
+{
+    "name": "request-app",
+    "version": "1.0.0",
+    "description": "A simple request app for logging in and submitting requests",
+    "main": "app.js",
+    "scripts": {
+      "start": "node backend/app.js"
+    },
+    "dependencies": {
+      "express": "^4.17.1",
+      "body-parser": "^1.19.0"
+    }
+  }
+  
