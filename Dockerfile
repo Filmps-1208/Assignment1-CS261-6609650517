@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 3000
 
 # สั่งให้รันแอปพลิเคชัน
-CMD ["node", "backend/app.js"]
+CMD ["node", "app.js"]
